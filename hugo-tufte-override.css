@@ -37,3 +37,11 @@ pre {
         display: none;
     }
 }
+
+
+iframe{
+    overflow:hidden;
+    height:80vh;
+    width:100%;
+    border-width:1px;
+}
