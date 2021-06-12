@@ -1,14 +1,78 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Home on Gerry Tonkin-Hill</title>
     <link>/</link>
     <description>Recent content in Home on Gerry Tonkin-Hill</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
+    <lastBuildDate>Sat, 20 Feb 2016 13:56:01 -0800</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hugo-Tufte Features</title>
+      <link>/posts/tufte-features/</link>
+      <pubDate>Sat, 20 Feb 2016 13:56:01 -0800</pubDate>
+      
+      <guid>/posts/tufte-features/</guid>
+      <description>&lt;p&gt;This is a quick demonstration post.  It serves as an example of the features
+of this theme.  One of them is \( \LaTeX \) via MathJax.
+
+
+  &lt;section&gt;
+
     
-	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+&lt;/p&gt;
+&lt;h2 id=&#34;a-bit-about-mathematics&#34;&gt;A Bit About Mathematics&lt;/h2&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;!-- raw HTML omitted --&gt;</description>
+    </item>
     
+    <item>
+      <title>Hide Date</title>
+      <link>/posts/nodate/</link>
+      <pubDate>Fri, 15 May 2015 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/nodate/</guid>
+      <description>Here is an example post where the date set, but hidden from display.
+Moreover, the reading time is also hidden.</description>
+    </item>
+    
+    <item>
+      <title>Blockquotes</title>
+      <link>/posts/blockquote/</link>
+      <pubDate>Mon, 19 Jan 2015 23:57:58 -0800</pubDate>
+      
+      <guid>/posts/blockquote/</guid>
+      <description>&lt;p&gt;Below is a blockquote.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;This is a blockquote with two paragraphs. Lorem ipsum dolor sit amet,
+consectetuer adipiscing elit. Aliquam hendrerit mi posuere lectus.
+Vestibulum enim wisi, viverra nec, fringilla in, laoreet vitae, risus.&lt;/p&gt;
+&lt;p&gt;Donec sit amet nisl. Aliquam semper ipsum sit amet velit. Suspendisse
+id sem consectetuer libero luctus adipiscing.&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>Just another sample post</title>
+      <link>/posts/new/</link>
+      <pubDate>Sat, 29 Mar 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/new/</guid>
+      <description>First Heading Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, consequatur aspernatur omnis iste. Voluptates, id inventore ea natus ab sed amet ipsa ratione sunt dignissimos. Soluta illum aliquid repellendus recusandae.
+Sub Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio, perferendis saepe voluptatem a nesciunt architecto voluptas deleniti dolor tempora quasi quidem odit rem fugit magnam minima quam dolores vel id?
+Conclusion Lorem ipsum dolor sit amet, consectetur adipisicing elit.</description>
+    </item>
+    
+    <item>
+      <title>First Post</title>
+      <link>/posts/old/</link>
+      <pubDate>Fri, 28 Mar 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/old/</guid>
+      <description>Sample Post 1 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</description>
+    </item>
     
     <item>
       <title>About</title>
@@ -16,7 +80,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/about/</guid>
-      <description> PhD Candidate Mathematical Genomics, University of Cambridge &amp;amp; Wellcome Sanger Institute Research Assistant, Walter and Eliza Hall Institute MSc Probability and Statistics, University of Melbourne Optimisation Consultant, Biarri Commercial Mathematics BSc Applied Mathematics, University of Melbourne  </description>
+      <description>Employment  Postdoctoral Research Fellow, University of Oslo Undergraduate Tutor, University of Cambridge Research Assistant, Walter and Eliza Hall Institute Optimisation Consultant, Biarri Commercial Mathematics Undergraduate Tutor, University of Melbourne  Education  PhD Mathematical Genomics, University of Cambridge &amp;amp; Wellcome Sanger Institute MSc Probability and Statistics, University of Melbourne BSc Applied Mathematics, University of Melbourne  </description>
     </item>
     
     <item>
@@ -25,10 +89,10 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/publications/</guid>
-      <description>† = joint authorship
-Horesh, Gal, Grace A. Blackwell, Gerry Tonkin-Hill, Jukka Corander, Eva Heinz, and Nicholas R. Thomson. 2021. &amp;quot;A Comprehensive and High-Quality Collection of Escherichia Coli Genomes and Their Genes.&amp;quot; Microbial Genomics, January. https://doi.org/10.1099/mgen.0.000499.
-Tonkin-Hill, Gerry†, Inigo Martincorena†, Roberto Amato, Andrew R. J. Lawson, Moritz Gerstung, Ian Johnston, David K. Jackson, et al. 2020. &amp;quot;Patterns of within-Host Genetic Diversity in SARS-CoV-2.&amp;quot; Cold Spring Harbor Laboratory. bioRxiv. https://doi.org/10.1101/2020.12.23.424229.
-Hamilton, William L.</description>
+      <description>This list is updated occasionally. A full list can be found on Google Scholar or Orcid.
+* = joint authorship
+Publications 2021 Horesh, Gal, Grace A. Blackwell, Gerry Tonkin-Hill, Jukka Corander, Eva Heinz, and Nicholas R. Thomson. 2021. &amp;ldquo;A Comprehensive and High-Quality Collection of Escherichia Coli Genomes and Their Genes.&amp;rdquo; Microbial Genomics, January. https://doi.org/10.1099/mgen.0.000499.
+2020 Tonkin-Hill, Gerry*, Inigo Martincorena*, Roberto Amato, Andrew R. J. Lawson, Moritz Gerstung, Ian Johnston, David K.</description>
     </item>
     
     <item>
@@ -37,11 +101,12 @@ Hamilton, William L.</description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/software/</guid>
-      <description>panaroo An error aware pipeline for pangenome investigation
- fastBAPS A fast approximation to a Dirichlet Process Mixture model (DPM) for clustering genetic data
- pairSNP A set of scripts for very quickly obtaining pairwise SNP distance matrices from multiple sequence alignments using sparse matrix libraries to improve performance.
- Starmie R package developed with Stuart Lee to make post processing of population structure software output easier.
- rhierBAPS R package implementing the hierBAPS algorithm.</description>
+      <description>Up to date code and documentation for my software can be found on GitHub.
+Software panaroo An error aware pipeline for pangenome investigation
+fastbaps A fast approximation to a Dirichlet Process Mixture model (DPM) for clustering genetic data
+pairsnp A set of scripts for very quickly obtaining pairwise SNP distance matrices from multiple sequence alignments using sparse matrix libraries to improve performance.
+rhierbaps R package implementing the hierBAPS algorithm.
+starmie R package developed with Stuart Lee to make post processing of population structure software output easier.</description>
     </item>
     
   </channel>
