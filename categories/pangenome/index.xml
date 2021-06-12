@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>pangenome on Gerry Tonkin-Hill</title>
+    <link>/categories/pangenome/</link>
+    <description>Recent content in pangenome on Gerry Tonkin-Hill</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sat, 12 Jun 2021 00:00:00 +0000</lastBuildDate><atom:link href="/categories/pangenome/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>How many gene annotations are there?</title>
+      <link>/posts/tufte-features/</link>
+      <pubDate>Sat, 12 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/tufte-features/</guid>
+      <description>How many gene annotations are there? Grace Blackwell recently gave a really interesting talk on her work  Blackwell, G. A. et al. Exploring bacterial diversity via a curated and searchable snapshot of archived DNA sequences. Cold Spring Harbor Laboratory 2021.03.02.433662 (2021) doi:10.1101/2021.03.02.433662 generating a standardised and curated database of 661,405 bacterial genome assemblies using read data retrieved from the European Nucleotide Archive (ENA).
+This dataset is already proving to be very useful.</description>
+    </item>
+    
+  </channel>
+</rss>
