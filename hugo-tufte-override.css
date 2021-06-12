@@ -3,7 +3,8 @@ body {
     margin-left: auto;
     margin-right: auto;
     padding-left: 20%;
-    font-family: et-book, Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
+    /* font-family: et-book, Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif; */
+    /* font-family: et-book, Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif; */
     background-color: #fffff8;
     color: #111;
     max-width: 1400px;
@@ -13,18 +14,26 @@ body {
 code {
     background-color: #f7f7f7;
     font-size: 0.95em;
-    font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
-    font-size: 1.0rem;
-    line-height: 1.6; 
+    /* font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace; */
+    font-size: 1.125rem;
+    line-height: 1.6;
 }
     
 pre code {
     width: 100% !important;
-    padding-left: 0 !important; 
+    padding-left: 0 !important;
+    display: block;
+    overflow-x: scroll;
+    font-size: 1.2rem;
 }
+
 
 pre {
     width: 55%;
 }
-      
-      
+
+@media screen and (max-width: 1000px) {
+    iframe {
+        display: none;
+    }
+}

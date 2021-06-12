@@ -5,73 +5,15 @@
     <link>/posts/</link>
     <description>Recent content in Posts on Gerry Tonkin-Hill</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 20 Feb 2016 13:56:01 -0800</lastBuildDate><atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 12 Jun 2021 00:00:00 +0000</lastBuildDate><atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Hugo-Tufte Features</title>
+      <title>How many gene annotations are there?</title>
       <link>/posts/tufte-features/</link>
-      <pubDate>Sat, 20 Feb 2016 13:56:01 -0800</pubDate>
+      <pubDate>Sat, 12 Jun 2021 00:00:00 +0000</pubDate>
       
       <guid>/posts/tufte-features/</guid>
-      <description>&lt;p&gt;This is a quick demonstration post.  It serves as an example of the features
-of this theme.  One of them is \( \LaTeX \) via MathJax.
-
-
-  &lt;section&gt;
-
-    
-&lt;/p&gt;
-&lt;h2 id=&#34;a-bit-about-mathematics&#34;&gt;A Bit About Mathematics&lt;/h2&gt;
-&lt;!-- raw HTML omitted --&gt;
-&lt;!-- raw HTML omitted --&gt;
-&lt;!-- raw HTML omitted --&gt;
-&lt;!-- raw HTML omitted --&gt;
-&lt;!-- raw HTML omitted --&gt;</description>
-    </item>
-    
-    <item>
-      <title>Hide Date</title>
-      <link>/posts/nodate/</link>
-      <pubDate>Fri, 15 May 2015 00:00:00 +0000</pubDate>
-      
-      <guid>/posts/nodate/</guid>
-      <description>Here is an example post where the date set, but hidden from display.
-Moreover, the reading time is also hidden.</description>
-    </item>
-    
-    <item>
-      <title>Blockquotes</title>
-      <link>/posts/blockquote/</link>
-      <pubDate>Mon, 19 Jan 2015 23:57:58 -0800</pubDate>
-      
-      <guid>/posts/blockquote/</guid>
-      <description>&lt;p&gt;Below is a blockquote.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;This is a blockquote with two paragraphs. Lorem ipsum dolor sit amet,
-consectetuer adipiscing elit. Aliquam hendrerit mi posuere lectus.
-Vestibulum enim wisi, viverra nec, fringilla in, laoreet vitae, risus.&lt;/p&gt;
-&lt;p&gt;Donec sit amet nisl. Aliquam semper ipsum sit amet velit. Suspendisse
-id sem consectetuer libero luctus adipiscing.&lt;/p&gt;
-&lt;/blockquote&gt;</description>
-    </item>
-    
-    <item>
-      <title>Just another sample post</title>
-      <link>/posts/new/</link>
-      <pubDate>Sat, 29 Mar 2014 00:00:00 +0000</pubDate>
-      
-      <guid>/posts/new/</guid>
-      <description>First Heading Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, consequatur aspernatur omnis iste. Voluptates, id inventore ea natus ab sed amet ipsa ratione sunt dignissimos. Soluta illum aliquid repellendus recusandae.
-Sub Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio, perferendis saepe voluptatem a nesciunt architecto voluptas deleniti dolor tempora quasi quidem odit rem fugit magnam minima quam dolores vel id?
-Conclusion Lorem ipsum dolor sit amet, consectetur adipisicing elit.</description>
-    </item>
-    
-    <item>
-      <title>First Post</title>
-      <link>/posts/old/</link>
-      <pubDate>Fri, 28 Mar 2014 00:00:00 +0000</pubDate>
-      
-      <guid>/posts/old/</guid>
-      <description>Sample Post 1 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</description>
+      <description>How many gene annotations are there? Grace Blackwell recently gave a really interesting talk on her work  Blackwell, G. A. et al. Exploring bacterial diversity via a curated and searchable snapshot of archived DNA sequences. Cold Spring Harbor Laboratory 2021.03.02.433662 (2021) doi:10.1101/2021.03.02.433662 generating a standardised and curated database of 661,405 bacterial genome assemblies using read data retrieved from the European Nucleotide Archive (ENA).
+This dataset is already proving to be very useful.</description>
     </item>
     
   </channel>

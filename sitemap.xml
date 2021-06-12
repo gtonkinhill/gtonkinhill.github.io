@@ -3,52 +3,22 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>/categories/</loc>
-    <lastmod>2016-02-20T13:56:01-08:00</lastmod>
+    <lastmod>2021-06-12T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/categories/gene-annotation/</loc>
+    <lastmod>2021-06-12T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/</loc>
-    <lastmod>2016-02-20T13:56:01-08:00</lastmod>
+    <lastmod>2021-06-12T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/posts/tufte-features/</loc>
-    <lastmod>2016-02-20T13:56:01-08:00</lastmod>
+    <lastmod>2021-06-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/categories/latex/</loc>
-    <lastmod>2016-02-20T13:56:01-08:00</lastmod>
-  </url><url>
-    <loc>/categories/mathjax/</loc>
-    <lastmod>2016-02-20T13:56:01-08:00</lastmod>
+    <loc>/categories/pangenome/</loc>
+    <lastmod>2021-06-12T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/posts/</loc>
-    <lastmod>2016-02-20T13:56:01-08:00</lastmod>
-  </url><url>
-    <loc>/categories/tufte-css/</loc>
-    <lastmod>2016-02-20T13:56:01-08:00</lastmod>
-  </url><url>
-    <loc>/posts/nodate/</loc>
-    <lastmod>2015-05-15T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>/posts/blockquote/</loc>
-    <lastmod>2015-01-19T23:57:58-08:00</lastmod>
-  </url><url>
-    <loc>/categories/fun/</loc>
-    <lastmod>2014-03-29T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>/categories/hugo/</loc>
-    <lastmod>2014-03-29T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>/posts/new/</loc>
-    <lastmod>2014-03-29T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>/categories/test/</loc>
-    <lastmod>2014-03-29T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>/categories/boring/</loc>
-    <lastmod>2014-03-28T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>/posts/old/</loc>
-    <lastmod>2014-03-28T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>/categories/template/</loc>
-    <lastmod>2014-03-28T00:00:00+00:00</lastmod>
+    <lastmod>2021-06-12T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/about/</loc>
   </url><url>
