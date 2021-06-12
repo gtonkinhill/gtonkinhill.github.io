@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+
+
+
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400|Old+Standard+TT:400' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+
+
+<head>
+  <title> Gerry Tonkin-Hill - How many gene annotations are there? </title>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="author" content="Gerry Tonkin-Hill">
+<meta name="generator" content="Hugo 0.83.1" />
+
+  
+  
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\\[','\\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    menuSettings: { zoom: "Double-Click" },
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+<script type="text/javascript"
+  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+
+
+
+
+<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+
+
+<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css">
+
+
+
+
+
+
+
+
+<script src="https://kit.fontawesome.com/5b425b11d1.js" crossorigin="anonymous"></script>
+
+
+<link rel="stylesheet" href="/css/tufte.css">
+<link rel="stylesheet" href="/css/hugo-tufte.css">
+<link rel="stylesheet" href="/hugo-tufte-override.css">
+
+
+</head>
+
+<body>
+  <div id="layout" class="pure-g">
+    <article class="pure-u-1">
+      <header class="brand">
+  <a href="/">
+    <span id="blog_logo">
+      <img src="/jerry_rickmorty.svg" style="float: left; padding-right: 5px;" alt="logo" />
+    </span>
+  </a>
+  <h1>Gerry Tonkin-Hill</h1>
+  <h2></h2>
+  <nav class="menu">
+    <ul>
+    
+        <li><a href="/"><i class='fa fa-home fa-lg'></i> Home</a></li>
+    
+        <li><a href="/about"><i class='fa fa-address-card fa-lg'></i> About</a></li>
+    
+        <li><a href="/software"><i class='fa fa-laptop-code fa-lg'></i> Software</a></li>
+    
+        <li><a href="/publications"><i class='fa fa-book fa-lg'></i> Publications</a></li>
+    
+        <li><a href="/posts"><i class='fa fa-blog fa-lg'></i> Posts</a></li>
+    
+    </ul>
+</nav>
+
+</header>
+      
+      
+
+      <section><h2 id="how-many-gene-annotations-are-there">How many gene annotations are there?</h2>
+<p><a href="https://scholar.google.com/citations?user=QhkA-dQAAAAJ&amp;hl=en&amp;oi=ao">Grace Blackwell</a> recently gave a really interesting talk on her <a href="https://www.biorxiv.org/content/10.1101/2021.03.02.433662v1.abstract">work</a>
+<label for="" class="margin-toggle sidenote-number"></label>
+<input type="checkbox" id="" class="margin-toggle"/>
+<span class="sidenote">Blackwell, G. A. et al. Exploring bacterial diversity via a curated and searchable snapshot of archived DNA sequences. Cold Spring Harbor Laboratory 2021.03.02.433662 (2021) doi:10.1101/2021.03.02.433662</span>  generating a standardised and curated database of 661,405 bacterial genome assemblies using read data retrieved from the European Nucleotide Archive (ENA).</p>
+<p>This dataset is already proving to be very <a href="https://www.biorxiv.org/content/10.1101/2021.06.09.447586v1">useful</a>. Grace has plans to generate gene annotations for the assemblies but was still deciding on the best approach for doing this in a standardised way across the very diverse dataset. We have run into this issue previously when developing <a href="https://gtonkinhill.github.io/panaroo/#/">panaroo</a>. It is possible to force annotation algorithms like <a href="https://github.com/hyattpd/prodigal">prodigal</a> to use the same annotation model for each assembly. This helps to prevent the scenario where the <em>exact</em> same nucleotide sequence is annotated differently in seperate genome assemblies. While this generates more standardised annotations it could repeatedly generate the same errors so it is unclear whether this is a preferable approach to allowing the algorithm to adapt to each genome individually.</p>
+<p>In discussing this after her talk the question of how many possible annotations there are in a typical bacterial genome came up. As I did not have any intuition for this I thought it would be worth taking a quick look. Conveniently, prodigal has an output option <code>-s</code> that lists all possible annotations (after some rough <a href="https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-11-119">filtering</a>).</p>
+<p>Taking a random <em>S. penumoniae</em>, <em>M. tuberculosis</em> and <em>K. penumoniae</em> genome assembly from the sets we used in the panaroo paper I ran prodigal using the <code>-s</code> option on each. I also ran the program excluding genes with N&rsquo;s or that overlapped the ends of contigs to see how much impact these sources of error had.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#204a87;font-weight:bold">for</span> f in *.fasta
+<span style="color:#204a87;font-weight:bold">do</span>
+<span style="color:#000">prefix</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#204a87;font-weight:bold">$(</span>basename <span style="color:#000">$f</span> .fasta<span style="color:#204a87;font-weight:bold">)</span>
+prodigal -i <span style="color:#000">$f</span> -o <span style="color:#4e9a06">${</span><span style="color:#000">prefix</span><span style="color:#4e9a06">}</span>.gff -s <span style="color:#4e9a06">${</span><span style="color:#000">prefix</span><span style="color:#4e9a06">}</span>_all.txt -f gff
+prodigal -i <span style="color:#000">$f</span> -o <span style="color:#4e9a06">${</span><span style="color:#000">prefix</span><span style="color:#4e9a06">}</span>_filt.gff -s <span style="color:#4e9a06">${</span><span style="color:#000">prefix</span><span style="color:#4e9a06">}</span>_filt_all.txt -f gff -c -m 
+<span style="color:#204a87;font-weight:bold">done</span>
+</code></pre></div><p>We can then use a bit of python to count the number of annotations. I split this up to also count those that shared the same stop codon.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">glob</span>
+
+<span style="color:#000">counts</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">{}</span>
+<span style="color:#204a87;font-weight:bold">for</span> <span style="color:#000">f</span> <span style="color:#204a87;font-weight:bold">in</span> <span style="color:#000">glob</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">glob</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#39;*_all.txt&#39;</span><span style="color:#000;font-weight:bold">):</span>
+  <span style="color:#000">name</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">f</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">replace</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#39;_all.txt&#39;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">&#39;&#39;</span><span style="color:#000;font-weight:bold">)</span>
+  <span style="color:#000">annotations</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">[]</span>
+  <span style="color:#204a87;font-weight:bold">with</span> <span style="color:#204a87">open</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">f</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">&#39;r&#39;</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#204a87;font-weight:bold">as</span> <span style="color:#000">infile</span><span style="color:#000;font-weight:bold">:</span>
+    <span style="color:#204a87;font-weight:bold">for</span> <span style="color:#000">line</span> <span style="color:#204a87;font-weight:bold">in</span> <span style="color:#000">infile</span><span style="color:#000;font-weight:bold">:</span>
+      <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">line</span><span style="color:#000;font-weight:bold">[</span><span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">]</span> <span style="color:#204a87;font-weight:bold">in</span> <span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">&#39;#&#39;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">&#39;B&#39;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">&#39;</span><span style="color:#4e9a06">\n</span><span style="color:#4e9a06">&#39;</span><span style="color:#000;font-weight:bold">]:</span> <span style="color:#204a87;font-weight:bold">continue</span>
+      <span style="color:#000">line</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">line</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">split</span><span style="color:#000;font-weight:bold">()</span>
+      <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">line</span><span style="color:#000;font-weight:bold">[</span><span style="color:#0000cf;font-weight:bold">2</span><span style="color:#000;font-weight:bold">]</span><span style="color:#ce5c00;font-weight:bold">==</span><span style="color:#4e9a06">&#39;-&#39;</span><span style="color:#000;font-weight:bold">:</span>
+        <span style="color:#000">annotations</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">append</span><span style="color:#000;font-weight:bold">((</span><span style="color:#000">line</span><span style="color:#000;font-weight:bold">[</span><span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">],</span> <span style="color:#4e9a06">&#39;-&#39;</span><span style="color:#000;font-weight:bold">))</span>
+      <span style="color:#204a87;font-weight:bold">else</span><span style="color:#000;font-weight:bold">:</span>
+        <span style="color:#000">annotations</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">append</span><span style="color:#000;font-weight:bold">((</span><span style="color:#000">line</span><span style="color:#000;font-weight:bold">[</span><span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">],</span> <span style="color:#4e9a06">&#39;+&#39;</span><span style="color:#000;font-weight:bold">))</span>
+  <span style="color:#000">counts</span><span style="color:#000;font-weight:bold">[</span><span style="color:#000">name</span><span style="color:#000;font-weight:bold">]</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">[</span><span style="color:#204a87">str</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87">len</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">annotations</span><span style="color:#000;font-weight:bold">)),</span> <span style="color:#204a87">str</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87">len</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87">set</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">annotations</span><span style="color:#000;font-weight:bold">)))]</span>
+  <span style="color:#204a87;font-weight:bold">with</span> <span style="color:#204a87">open</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">name</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#4e9a06">&#39;.gff&#39;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">&#39;r&#39;</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#204a87;font-weight:bold">as</span> <span style="color:#000">infile</span><span style="color:#000;font-weight:bold">:</span>
+    <span style="color:#000">count</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#0000cf;font-weight:bold">0</span>
+    <span style="color:#204a87;font-weight:bold">for</span> <span style="color:#000">line</span> <span style="color:#204a87;font-weight:bold">in</span> <span style="color:#000">infile</span><span style="color:#000;font-weight:bold">:</span>
+      <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">line</span><span style="color:#000;font-weight:bold">[</span><span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">]</span><span style="color:#ce5c00;font-weight:bold">==</span><span style="color:#4e9a06">&#39;#&#39;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#204a87;font-weight:bold">continue</span>
+      <span style="color:#000">count</span> <span style="color:#ce5c00;font-weight:bold">+=</span> <span style="color:#0000cf;font-weight:bold">1</span>
+  <span style="color:#000">counts</span><span style="color:#000;font-weight:bold">[</span><span style="color:#000">name</span><span style="color:#000;font-weight:bold">]</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">append</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87">str</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">count</span><span style="color:#000;font-weight:bold">))</span>
+
+<span style="color:#204a87;font-weight:bold">with</span> <span style="color:#204a87">open</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#39;annotation_counts.csv&#39;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">&#39;w&#39;</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#204a87;font-weight:bold">as</span> <span style="color:#000">outfile</span><span style="color:#000;font-weight:bold">:</span>
+  <span style="color:#000">outfile</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">write</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#39;species,all,same_start,final</span><span style="color:#4e9a06">\n</span><span style="color:#4e9a06">&#39;</span><span style="color:#000;font-weight:bold">)</span>
+  <span style="color:#204a87;font-weight:bold">for</span> <span style="color:#000">name</span> <span style="color:#204a87;font-weight:bold">in</span> <span style="color:#000">counts</span><span style="color:#000;font-weight:bold">:</span>
+    <span style="color:#000">outfile</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">write</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#39;,&#39;</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">join</span><span style="color:#000;font-weight:bold">([</span><span style="color:#000">name</span><span style="color:#000;font-weight:bold">]</span><span style="color:#ce5c00;font-weight:bold">+</span><span style="color:#204a87">list</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">counts</span><span style="color:#000;font-weight:bold">[</span><span style="color:#000">name</span><span style="color:#000;font-weight:bold">]))</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#4e9a06">&#39;</span><span style="color:#4e9a06">\n</span><span style="color:#4e9a06">&#39;</span><span style="color:#000;font-weight:bold">)</span>
+</code></pre></div><p>We can then plot the final counts using ggplot</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#000">library</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ggplot2</span><span style="color:#000;font-weight:bold">)</span>
+<span style="color:#000">library</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">data.table</span><span style="color:#000;font-weight:bold">)</span>
+
+<span style="color:#000">counts</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#000">fread</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;~/Downloads/annotation_counts.csv&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">data.table</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#204a87;font-weight:bold">FALSE</span><span style="color:#000;font-weight:bold">)</span>
+<span style="color:#000">counts</span><span style="color:#ce5c00;font-weight:bold">$</span><span style="color:#000">filtered</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#000">ifelse</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">grepl</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#39;*filt&#39;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">counts</span><span style="color:#ce5c00;font-weight:bold">$</span><span style="color:#000">species</span><span style="color:#000;font-weight:bold">),</span> 
+                          <span style="color:#4e9a06">&#39;without closed ends&#39;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">&#39;with closed ends&#39;</span><span style="color:#000;font-weight:bold">)</span>
+<span style="color:#000">counts</span><span style="color:#ce5c00;font-weight:bold">$</span><span style="color:#000">species</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#000">gsub</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#39;_filt&#39;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">&#39;&#39;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">counts</span><span style="color:#ce5c00;font-weight:bold">$</span><span style="color:#000">species</span><span style="color:#000;font-weight:bold">)</span>
+<span style="color:#000">plotdf</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#000">melt</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">counts</span><span style="color:#000;font-weight:bold">)</span>
+<span style="color:#000">plotdf</span><span style="color:#ce5c00;font-weight:bold">$</span><span style="color:#000">species</span><span style="color:#000">[grepl</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#39;k&#39;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">plotdf</span><span style="color:#ce5c00;font-weight:bold">$</span><span style="color:#000">species</span><span style="color:#000;font-weight:bold">)</span><span style="color:#000">]</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#4e9a06">&#39;K. pneumoniae&#39;</span>
+<span style="color:#000">plotdf</span><span style="color:#ce5c00;font-weight:bold">$</span><span style="color:#000">species</span><span style="color:#000">[grepl</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#39;s&#39;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">plotdf</span><span style="color:#ce5c00;font-weight:bold">$</span><span style="color:#000">species</span><span style="color:#000;font-weight:bold">)</span><span style="color:#000">]</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#4e9a06">&#39;S. pneumoniae&#39;</span>
+<span style="color:#000">plotdf</span><span style="color:#ce5c00;font-weight:bold">$</span><span style="color:#000">species</span><span style="color:#000">[grepl</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#39;tb&#39;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">plotdf</span><span style="color:#ce5c00;font-weight:bold">$</span><span style="color:#000">species</span><span style="color:#000;font-weight:bold">)</span><span style="color:#000">]</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#4e9a06">&#39;M. tuberculosis&#39;</span>
+
+<span style="color:#000">ggplot</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">plotdf</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">aes</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">x</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#000">species</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">y</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#000">value</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">fill</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#000">species</span><span style="color:#000;font-weight:bold">))</span> <span style="color:#ce5c00;font-weight:bold">+</span> 
+  <span style="color:#000">geom_col</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#ce5c00;font-weight:bold">+</span> 
+  <span style="color:#000">facet_grid</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">variable</span><span style="color:#ce5c00;font-weight:bold">~</span><span style="color:#000">filtered</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">+</span>
+  <span style="color:#000">theme_minimal</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">base_size</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#0000cf;font-weight:bold">16</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">+</span>
+  <span style="color:#000">scale_y_sqrt</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">labels</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">function</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">x</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000">format</span><span style="color:#000;font-weight:bold">(</span>
+    <span style="color:#000">x</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">scientific</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#204a87;font-weight:bold">TRUE</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">digits</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">trim</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#204a87;font-weight:bold">TRUE</span><span style="color:#000;font-weight:bold">),</span>
+                     <span style="color:#000">breaks</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">c</span><span style="color:#000;font-weight:bold">(</span><span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">,</span><span style="color:#0000cf;font-weight:bold">1e4</span><span style="color:#000;font-weight:bold">,</span><span style="color:#0000cf;font-weight:bold">1e5</span><span style="color:#000;font-weight:bold">))</span> <span style="color:#ce5c00;font-weight:bold">+</span>
+  <span style="color:#000">theme</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">axis.title.x</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#000">element_blank</span><span style="color:#000;font-weight:bold">(),</span>
+        <span style="color:#000">axis.text.x</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#000">element_blank</span><span style="color:#000;font-weight:bold">(),</span>
+        <span style="color:#000">axis.ticks.x</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#000">element_blank</span><span style="color:#000;font-weight:bold">())</span> <span style="color:#ce5c00;font-weight:bold">+</span>
+  <span style="color:#000">xlab</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;&#34;</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#000">ylab</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;annotation count&#34;</span><span style="color:#000;font-weight:bold">)</span>
+</code></pre></div><p>
+
+
+  
+    <figure  class="class param">
+  
+
+
+
+  <label for="mn-export-import" class="margin-toggle">⊕</label>
+  <input type="checkbox" id="mn-export-import" class="margin-toggle">
+  <span class="marginnote">
+  
+
+  
+  
+  
+  
+  
+
+  </span>
+
+
+  
+  <img src="/figures/annotation_counts.png" >
+  
+
+
+
+</figure>
+
+
+
+
+  </section>
+
+    
+</p>
+<p>Overall it looks like there are around an order of magnitude more potential stop sites than the final list of genes output by prodigal. If we instead include the number of possible start sides for each stop site we find a further order of magnitude increase in the number of possible annotations. This is quite large and underscores the challenge of automatic gene annotation and the potential for small algorithmic decisions to have large consequences.</p>
+<p>The exact number of annotations including those that overlap with contig ends is given in the following table.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Species</th>
+<th style="text-align:center">All</th>
+<th style="text-align:center">Same stop codon</th>
+<th style="text-align:center">Final</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><em>K. pneumoniae</em></td>
+<td style="text-align:center">234,325</td>
+<td style="text-align:center">31,006</td>
+<td style="text-align:center">5,791</td>
+</tr>
+<tr>
+<td style="text-align:center"><em>M. tuberculosis</em></td>
+<td style="text-align:center">246,940</td>
+<td style="text-align:center">45,640</td>
+<td style="text-align:center">4,044</td>
+</tr>
+<tr>
+<td style="text-align:center"><em>S. pneumoniae</em></td>
+<td style="text-align:center">74,255</td>
+<td style="text-align:center">17,242</td>
+<td style="text-align:center">2,184</td>
+</tr>
+</tbody>
+</table>
+<p>Looking at the same table after excluding genes annotated at contig ends or across N&rsquo;s we see that this has a small but not insignificant impact. In fact, we have previously found that the accumulation of these differences over many genomes can lead to <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-020-02090-4">large</a> differences in pangenome inference.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Species</th>
+<th style="text-align:center">All</th>
+<th style="text-align:center">Same stop codon</th>
+<th style="text-align:center">Final</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><em>K. pneumoniae</em></td>
+<td style="text-align:center">220,963</td>
+<td style="text-align:center">30,463</td>
+<td style="text-align:center">5,351</td>
+</tr>
+<tr>
+<td style="text-align:center"><em>M. tuberculosis</em></td>
+<td style="text-align:center">24,493</td>
+<td style="text-align:center">45,484</td>
+<td style="text-align:center">4,047</td>
+</tr>
+<tr>
+<td style="text-align:center"><em>S. pneumoniae</em></td>
+<td style="text-align:center">73,552</td>
+<td style="text-align:center">17,163</td>
+<td style="text-align:center">2,147</td>
+</tr>
+</tbody>
+</table>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<blockquote>
+</blockquote>
+</section>
+      <section>
+        
+
+        <footer class="page-footer">
+		<hr>
+		<ul class="page-footer-menu">
+		
+      <li><a href="https://github.com/gtonkinhill"><i class='fa fa-github fa-2x'></i> </a></li>
+		
+      <li><a href="https://orcid.org/0000-0003-4397-2224"><i class='fab fa-orcid fa-2x'></i></a></li>
+		
+      <li><a href="https://scholar.google.co.uk/citations?user=rpyuABcAAAAJ&amp;hl=en&amp;oi=ao"><i class='fa fa-graduation-cap fa-2x'></i> </a></li>
+		
+      <li><a href="https://twitter.com/gerrythill"><i class='fa fa-twitter fa-2x'></i> </a></li>
+		
+		</ul>
+
+  
+
+	<div class="copyright">
+	<p>
+    
+      &copy; 2021
+    Gerry Tonkin-Hill.
+    All rights reserved.
+    
+  </p>
+</div>
+</footer>
+
+
+
+      </section>
+    </article>
+  </div>
+</body>
+
+</html>
