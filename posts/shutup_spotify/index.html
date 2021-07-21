@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+
+
+
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400|Old+Standard+TT:400' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+
+
+<head>
+  <title> Gerry Tonkin-Hill - Shutup Spotify! </title>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="author" content="Gerry Tonkin-Hill">
+<meta name="generator" content="Hugo 0.83.1" />
+
+  
+  
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\\[','\\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    menuSettings: { zoom: "Double-Click" },
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+<script type="text/javascript"
+  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+
+
+
+
+<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+
+
+<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css">
+
+
+
+
+
+
+
+
+<script src="https://kit.fontawesome.com/5b425b11d1.js" crossorigin="anonymous"></script>
+
+
+<link rel="stylesheet" href="/css/tufte.css">
+<link rel="stylesheet" href="/css/hugo-tufte.css">
+<link rel="stylesheet" href="/hugo-tufte-override.css">
+
+
+  
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    
+    ga('create', 'UA-114314394-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+
+</head>
+
+<body>
+  <div id="layout" class="pure-g">
+    <article class="pure-u-1">
+      <header class="brand">
+  <a href="/">
+    <span id="blog_logo">
+      <img src="/jerry_rickmorty.svg" style="float: left; padding-right: 5px;" alt="logo" />
+    </span>
+  </a>
+  <h1>Gerry Tonkin-Hill</h1>
+  <h2></h2>
+  <nav class="menu">
+    <ul>
+    
+        <li><a href="/"><i class='fa fa-home fa-lg'></i> Home</a></li>
+    
+        <li><a href="/about"><i class='fa fa-address-card fa-lg'></i> About</a></li>
+    
+        <li><a href="/software"><i class='fa fa-laptop-code fa-lg'></i> Software</a></li>
+    
+        <li><a href="/publications"><i class='fa fa-book fa-lg'></i> Publications</a></li>
+    
+        <li><a href="/posts"><i class='fa fa-edit fa-lg'></i> Posts</a></li>
+    
+    </ul>
+</nav>
+
+</header>
+      
+      
+
+      <section><h2 id="shutup-spotify">Shutup Spotify!</h2>
+<p>Apart from when I&rsquo;m forced to work from home I have generally worked in open plan offices. One of my big fears each day is that I will open my laptop and whatever embarrassing song I was listening to will immediately start playing on full volume for everyone to hear.</p>
+<p>Recently I bought a new pair of bluetooth headphones that conveniently allow you to connect to multiple devices at once. Annoyingly, they will <a href="https://community.spotify.com/t5/Other-Podcasts-Partners-etc/Playback-gets-paused-if-Bluetooth-headset-is-connected-with/td-p/5208179">force Spotify to pause</a> if you have the Spotify app open on both devices, even when your laptop lid is closed.</p>
+<p>This finally motivated me to look into how I could force Spotify to quit whenever I closed my laptop.</p>
+<p>After some searching on StackOverflow I found that <a href="https://stackoverflow.com/questions/15868200/how-to-check-if-macbook-lid-is-closed-via-terminal">you can run a script</a> to check whether a mac laptop&rsquo;s lid is open or closed. Some further Googling introduced me to LaunchDaemons which allow you to automatically run a process in the background whenever the computer starts up. Using this, I could frequently query the status of the lid and issue a command to quit Spotify and set the system volume to mute if the lid was closed.</p>
+<p>The script is relatively straight forward</p>
+<pre><code>while sleep 5 #check every 5 seconds
+    do 
+    number=$(ps aux | grep -v grep | grep -ci Spotify) #check whether spotify is open
+    lid=$(ioreg -r -k AppleClamshellState -d 4 | grep AppleClamshellState  | grep -ci 'No') #check whether the lid is open
+    if [ $lid -eq 0 ] &amp;&amp; [ $number -gt 0 ]
+        then 
+        /usr/bin/osascript -e 'quit app &quot;Spotify&quot;' # quit spotify
+        /usr/bin/sosascript -e &quot;set Volume 0&quot; # mute the system volume
+    fi
+ done
+</code></pre><p>This can then be packaged up into a .plist file and placed into <code>/Users/username/Library/LaunchAgents</code> folder so that it runs in the background everytime you start up your laptop. The resulting .plist file looks like</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE plist PUBLIC &quot;-//Apple//DTD PLIST 1.0//EN&quot;
+ &quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;&gt;
+&lt;plist version=&quot;1.0&quot;&gt;
+&lt;dict&gt;
+    &lt;key&gt;Label&lt;/key&gt;
+    &lt;string&gt;shutup-spotify&lt;/string&gt;
+    &lt;key&gt;Program&lt;/key&gt;
+    &lt;string&gt;/usr/bin/osascript&lt;/string&gt;
+    &lt;key&gt;Program&lt;/key&gt;
+    &lt;string&gt;/bin/sh&lt;/string&gt;
+    &lt;key&gt;ProgramArguments&lt;/key&gt;
+    &lt;array&gt;
+        &lt;string&gt;sh&lt;/string&gt;
+        &lt;string&gt;-c&lt;/string&gt;
+        &lt;string&gt;while sleep 5; do number=$(ps aux | grep -v grep | grep -ci Spotify); lid=$(ioreg -r -k AppleClamshellState -d 4 | grep AppleClamshellState  | grep -ci 'No'); if [ $lid -eq 0 ] &amp;&amp; [ $number -gt 0 ]; then /usr/bin/osascript -e 'quit app &quot;Spotify&quot;'; /usr/bin/sosascript -e &quot;set Volume 0&quot;; fi; done&lt;/string&gt;
+    &lt;/array&gt;
+    &lt;key&gt;ServiceDescription&lt;/key&gt;
+    &lt;string&gt;Auto Keypress&lt;/string&gt;
+    &lt;key&gt;KeepAlive&lt;/key&gt;
+    &lt;true/&gt;
+&lt;/dict&gt;
+&lt;/plist&gt;
+</code></pre><p>I am very new at writing .plist files so I&rsquo;m sure there are improvements that could be made. But for now, I can now finally relax when opening my laptop!</p>
+</section>
+      <section>
+        
+
+        <footer class="page-footer">
+		<hr>
+		<ul class="page-footer-menu">
+		
+      <li><a href="https://github.com/gtonkinhill"><i class='fa fa-github fa-2x'></i> </a></li>
+		
+      <li><a href="https://orcid.org/0000-0003-4397-2224"><i class='fab fa-orcid fa-2x'></i></a></li>
+		
+      <li><a href="https://scholar.google.co.uk/citations?user=rpyuABcAAAAJ&amp;hl=en&amp;oi=ao"><i class='fa fa-graduation-cap fa-2x'></i> </a></li>
+		
+      <li><a href="https://twitter.com/gerrythill"><i class='fa fa-twitter fa-2x'></i> </a></li>
+		
+		</ul>
+
+  
+
+	<div class="copyright">
+	<p>
+    
+      &copy; 2021
+    Gerry Tonkin-Hill.
+    All rights reserved.
+    
+  </p>
+</div>
+</footer>
+
+
+
+      </section>
+    </article>
+  </div>
+</body>
+
+</html>

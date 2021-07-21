@@ -3,21 +3,30 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>/categories/</loc>
-    <lastmod>2021-06-12T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>/categories/gene-annotation/</loc>
-    <lastmod>2021-06-12T00:00:00+00:00</lastmod>
+    <lastmod>2021-07-21T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/</loc>
+    <lastmod>2021-07-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/categories/mac/</loc>
+    <lastmod>2021-07-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/categories/miscellaneous/</loc>
+    <lastmod>2021-07-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/posts/</loc>
+    <lastmod>2021-07-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/posts/shutup_spotify/</loc>
+    <lastmod>2021-07-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/categories/gene-annotation/</loc>
     <lastmod>2021-06-12T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/posts/how_many_annotations/</loc>
     <lastmod>2021-06-12T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/categories/pangenome/</loc>
-    <lastmod>2021-06-12T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>/posts/</loc>
     <lastmod>2021-06-12T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/about/</loc>
