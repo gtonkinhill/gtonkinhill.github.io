@@ -12,7 +12,7 @@ body {
 }
 
 code {
-    background-color: #f7f7f7;
+    background-color: #fffff8;
     font-size: 0.95em;
     /* font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace; */
     font-size: 1.125rem;
@@ -20,6 +20,7 @@ code {
 }
     
 pre code {
+    background-color: #fffff8;
     width: 100% !important;
     padding-left: 0 !important;
     display: block;
@@ -27,8 +28,16 @@ pre code {
     font-size: 1.2rem;
 }
 
+.highlight pre {
+    background-color: #fffff8
+}
+
+.highlight {
+    background-color: #fffff8
+}
 
 pre {
+    background-color: #fffff8;
     width: 55%;
 }
 
@@ -45,3 +54,10 @@ iframe{
     width:100%;
     border-width:1px;
 }
+
+
+@media (max-width: 700px) {                  
+    .content-to-hide {
+       display: none;
+    }
+ }

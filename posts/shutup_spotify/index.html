@@ -10,7 +10,6 @@
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="manifest" href="/site.webmanifest">
 
-
 <head>
   <title> Gerry Tonkin-Hill - Shut up Spotify! </title>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
@@ -152,41 +151,41 @@ MathJax.Hub.Config({
 <p>This finally motivated me to look into how I could force Spotify to quit whenever I closed my laptop.</p>
 <p>After some searching on StackOverflow I found that <a href="https://stackoverflow.com/questions/15868200/how-to-check-if-macbook-lid-is-closed-via-terminal">you can run a script</a> to check whether a mac laptop&rsquo;s lid is open or closed. Some further Googling introduced me to LaunchDaemons which allow you to automatically run a process in the background whenever the computer starts up. Using this, I could frequently query the status of the lid and issue a command to quit Spotify and set the system volume to mute if the lid was closed.</p>
 <p>The script is relatively straight forward</p>
-<pre><code>while sleep 5 #check every 5 seconds
-    do 
-    number=$(ps aux | grep -v grep | grep -ci Spotify) #check whether spotify is open
-    lid=$(ioreg -r -k AppleClamshellState -d 4 | grep AppleClamshellState  | grep -ci 'No') #check whether the lid is open
-    if [ $lid -eq 0 ] &amp;&amp; [ $number -gt 0 ]
-        then 
-        /usr/bin/osascript -e 'quit app &quot;Spotify&quot;' # quit spotify
-        /usr/bin/sosascript -e &quot;set Volume 0&quot; # mute the system volume
-    fi
- done
-</code></pre><p>This can then be packaged up into a .plist file and placed into <code>/Users/username/Library/LaunchAgents</code> folder so that it runs in the background everytime you start up your laptop. The resulting .plist file looks like</p>
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;!DOCTYPE plist PUBLIC &quot;-//Apple//DTD PLIST 1.0//EN&quot;
- &quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;&gt;
-&lt;plist version=&quot;1.0&quot;&gt;
-&lt;dict&gt;
-    &lt;key&gt;Label&lt;/key&gt;
-    &lt;string&gt;shutup-spotify&lt;/string&gt;
-    &lt;key&gt;Program&lt;/key&gt;
-    &lt;string&gt;/usr/bin/osascript&lt;/string&gt;
-    &lt;key&gt;Program&lt;/key&gt;
-    &lt;string&gt;/bin/sh&lt;/string&gt;
-    &lt;key&gt;ProgramArguments&lt;/key&gt;
-    &lt;array&gt;
-        &lt;string&gt;sh&lt;/string&gt;
-        &lt;string&gt;-c&lt;/string&gt;
-        &lt;string&gt;while sleep 5; do number=$(ps aux | grep -v grep | grep -ci Spotify); lid=$(ioreg -r -k AppleClamshellState -d 4 | grep AppleClamshellState  | grep -ci 'No'); if [ $lid -eq 0 ] &amp;&amp; [ $number -gt 0 ]; then /usr/bin/osascript -e 'quit app &quot;Spotify&quot;'; /usr/bin/sosascript -e &quot;set Volume 0&quot;; fi; done&lt;/string&gt;
-    &lt;/array&gt;
-    &lt;key&gt;ServiceDescription&lt;/key&gt;
-    &lt;string&gt;Auto Keypress&lt;/string&gt;
-    &lt;key&gt;KeepAlive&lt;/key&gt;
-    &lt;true/&gt;
-&lt;/dict&gt;
-&lt;/plist&gt;
-</code></pre><p>I am very new at writing .plist files so I&rsquo;m sure there are improvements that could be made. But for now, I can finally relax when opening my laptop!</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span><span style="font-weight:bold">while</span> sleep <span style="color:#099">5</span> <span style="color:#998;font-style:italic">#check every 5 seconds</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2</span>    <span style="font-weight:bold">do</span> 
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3</span>    <span style="color:#008080">number</span><span style="font-weight:bold">=</span><span style="font-weight:bold">$(</span>ps aux | grep -v grep | grep -ci Spotify<span style="font-weight:bold">)</span> <span style="color:#998;font-style:italic">#check whether spotify is open</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4</span>    <span style="color:#008080">lid</span><span style="font-weight:bold">=</span><span style="font-weight:bold">$(</span>ioreg -r -k AppleClamshellState -d <span style="color:#099">4</span> | grep AppleClamshellState  | grep -ci <span style="color:#b84">&#39;No&#39;</span><span style="font-weight:bold">)</span> <span style="color:#998;font-style:italic">#check whether the lid is open</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5</span>    <span style="font-weight:bold">if</span> <span style="font-weight:bold">[</span> <span style="color:#008080">$lid</span> -eq <span style="color:#099">0</span> <span style="font-weight:bold">]</span> <span style="font-weight:bold">&amp;&amp;</span> <span style="font-weight:bold">[</span> <span style="color:#008080">$number</span> -gt <span style="color:#099">0</span> <span style="font-weight:bold">]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6</span>        <span style="font-weight:bold">then</span> 
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7</span>        /usr/bin/osascript -e <span style="color:#b84">&#39;quit app &#34;Spotify&#34;&#39;</span> <span style="color:#998;font-style:italic"># quit spotify</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8</span>        /usr/bin/sosascript -e <span style="color:#b84">&#34;set Volume 0&#34;</span> <span style="color:#998;font-style:italic"># mute the system volume</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9</span>    <span style="font-weight:bold">fi</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10</span> <span style="font-weight:bold">done</span>
+</code></pre></div><p>This can then be packaged up into a .plist file and placed into <code>/Users/username/Library/LaunchAgents</code> folder so that it runs in the background everytime you start up your laptop. The resulting .plist file looks like</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span><span style="color:#999;font-weight:bold">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2</span><span style="color:#999;font-weight:bold">&lt;!DOCTYPE plist PUBLIC &#34;-//Apple//DTD PLIST 1.0//EN&#34;
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3</span><span style="color:#999;font-weight:bold"> &#34;http://www.apple.com/DTDs/PropertyList-1.0.dtd&#34;&gt;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4</span><span style="color:#000080">&lt;plist</span> <span style="color:#008080">version=</span><span style="color:#b84">&#34;1.0&#34;</span><span style="color:#000080">&gt;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5</span><span style="color:#000080">&lt;dict&gt;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6</span>    <span style="color:#000080">&lt;key&gt;</span>Label<span style="color:#000080">&lt;/key&gt;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7</span>    <span style="color:#000080">&lt;string&gt;</span>shutup-spotify<span style="color:#000080">&lt;/string&gt;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8</span>    <span style="color:#000080">&lt;key&gt;</span>Program<span style="color:#000080">&lt;/key&gt;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9</span>    <span style="color:#000080">&lt;string&gt;</span>/usr/bin/osascript<span style="color:#000080">&lt;/string&gt;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10</span>    <span style="color:#000080">&lt;key&gt;</span>Program<span style="color:#000080">&lt;/key&gt;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11</span>    <span style="color:#000080">&lt;string&gt;</span>/bin/sh<span style="color:#000080">&lt;/string&gt;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12</span>    <span style="color:#000080">&lt;key&gt;</span>ProgramArguments<span style="color:#000080">&lt;/key&gt;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13</span>    <span style="color:#000080">&lt;array&gt;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14</span>        <span style="color:#000080">&lt;string&gt;</span>sh<span style="color:#000080">&lt;/string&gt;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15</span>        <span style="color:#000080">&lt;string&gt;</span>-c<span style="color:#000080">&lt;/string&gt;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16</span>        <span style="color:#000080">&lt;string&gt;</span>while sleep 5; do number=$(ps aux | grep -v grep | grep -ci Spotify); lid=$(ioreg -r -k AppleClamshellState -d 4 | grep AppleClamshellState  | grep -ci &#39;No&#39;); if [ $lid -eq 0 ] <span style="color:#a61717;background-color:#e3d2d2">&amp;&amp;</span> [ $number -gt 0 ]; then /usr/bin/osascript -e &#39;quit app &#34;Spotify&#34;&#39;; /usr/bin/sosascript -e &#34;set Volume 0&#34;; fi; done<span style="color:#000080">&lt;/string&gt;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17</span>    <span style="color:#000080">&lt;/array&gt;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18</span>    <span style="color:#000080">&lt;key&gt;</span>ServiceDescription<span style="color:#000080">&lt;/key&gt;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19</span>    <span style="color:#000080">&lt;string&gt;</span>Auto Keypress<span style="color:#000080">&lt;/string&gt;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20</span>    <span style="color:#000080">&lt;key&gt;</span>KeepAlive<span style="color:#000080">&lt;/key&gt;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21</span>    <span style="color:#000080">&lt;true/&gt;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22</span><span style="color:#000080">&lt;/dict&gt;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23</span><span style="color:#000080">&lt;/plist&gt;</span>
+</code></pre></div><p>I am very new at writing .plist files so I&rsquo;m sure there are improvements that could be made. But for now, I can finally relax when opening my laptop!</p>
 </section>
       
       <section><script src="https://utteranc.es/client.js"
@@ -219,12 +218,14 @@ MathJax.Hub.Config({
 	<p>
     
       &copy; 2021
-    Gerry Tonkin-Hill.
-    All rights reserved.
+    Gerry Tonkin-Hill
+    (<a style="text-decorations:none; color:inherit;" href=https://creativecommons.org/licenses/by-nc/2.5/>CC BY-NC 2.5</a>)
     
   </p>
 </div>
 </footer>
+
+
 
 
 

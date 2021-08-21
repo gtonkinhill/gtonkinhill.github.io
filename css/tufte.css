@@ -115,7 +115,7 @@ blockquote footer { width: 50%;
                     font-size: 1.1rem;
                     text-align: right; }
 
-ol, ul { width: 45%;
+ol, ul { width: 85%;
          -webkit-padding-start: 5%;
          -webkit-padding-end: 5%; }
 
@@ -231,7 +231,7 @@ h1 .code, h2 .code, h3 .code { font-size: 0.80em; }
 
 pre.code { width: 52.5%;
            padding-left: 2.5%;
-           overflow-x: scroll; }
+           overflow-x: scroll;}
 
 .fullwidth { max-width: 90%;
              clear:both; }
@@ -258,7 +258,7 @@ label.margin-toggle:not(.sidenote-number) { display: none; }
                                                                    position: relative; }
                             label { cursor: pointer; }
                             pre.code { width: 90%;
-                                       padding: 0; }
+                                       padding: 0;}
                             .table-caption { display: block;
                                              float: right;
                                              clear: both;

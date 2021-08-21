@@ -40,9 +40,11 @@ pre code {
     overflow-x: scroll;
 }
 
+
+
 /*@media (max-width: 760px) {
     pre code {
-        width: 90%;
+        width: 90;
         padding: 0;
     }
  }*/
