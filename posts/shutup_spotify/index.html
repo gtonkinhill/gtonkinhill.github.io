@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+
+
+
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400|Old+Standard+TT:400' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+
+<head>
+  <title> Gerry Tonkin-Hill - Shut up Spotify! </title>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="author" content="Gerry Tonkin-Hill">
+<meta name="generator" content="Hugo 0.83.1" />
+
+  
+  
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\\[','\\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    menuSettings: { zoom: "Double-Click" },
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+<script type="text/javascript"
+  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+
+
+
+
+<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+
+
+<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css">
+
+
+
+
+
+
+
+
+<script src="https://kit.fontawesome.com/5b425b11d1.js" crossorigin="anonymous"></script>
+
+
+<link rel="stylesheet" href="/css/tufte.css">
+<link rel="stylesheet" href="/css/hugo-tufte.css">
+<link rel="stylesheet" href="/hugo-tufte-override.css">
+
+
+  
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    
+    ga('create', 'UA-114314394-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+
+</head>
+
+<body>
+  <div id="layout" class="pure-g">
+    <article class="pure-u-1">
+      <header class="brand">
+  <a href="/">
+    <span id="blog_logo">
+      <img src="/jerry_rickmorty.svg" style="float: left; padding-right: 5px;" alt="logo" />
+    </span>
+  </a>
+  <h1>Gerry Tonkin-Hill</h1>
+  <h2></h2>
+  <nav class="menu">
+    <ul>
+    
+        <li><a href="/"><i class='fa fa-home fa-lg'></i> Home</a></li>
+    
+        <li><a href="/about"><i class='fa fa-address-card fa-lg'></i> About</a></li>
+    
+        <li><a href="/software"><i class='fa fa-laptop-code fa-lg'></i> Software</a></li>
+    
+        <li><a href="/publications"><i class='fa fa-book fa-lg'></i> Publications</a></li>
+    
+        <li><a href="/posts"><i class='fa fa-edit fa-lg'></i> Posts</a></li>
+    
+    </ul>
+</nav>
+
+</header>
+      
+      
+
+      <section><h2 id="shut-up-spotify">Shut up Spotify!</h2>
+<p>
+
+
+
+
+  <label for="" class="margin-toggle">⊕</label>
+  <input type="checkbox" id="" class="margin-toggle">
+  <span class="marginnote">
+  
+    
+    <img src="https://imgs.xkcd.com/comics/myspace.png" >
+    
+  
+
+  <strong>Myspace </strong>
+  
+  <a href="https://xkcd.com/134/">
+  (xkcd)
+  </a>
+
+  </span>
+
+
+
+
+
+
+
+  </section>
+
+    
+</p>
+<p>Apart from when I&rsquo;m forced to work from home I have generally worked in open plan offices. One of my big fears each day is that I will open my laptop and whatever embarrassing song I was listening to will immediately start playing on full volume for everyone to hear.</p>
+<p>Recently I bought a new pair of bluetooth headphones that conveniently allow you to connect to multiple devices at once. Annoyingly, they will <a href="https://community.spotify.com/t5/Other-Podcasts-Partners-etc/Playback-gets-paused-if-Bluetooth-headset-is-connected-with/td-p/5208179">force Spotify to pause</a> if you have the Spotify app open on both devices, even when your laptop lid is closed.</p>
+<p>This finally motivated me to look into how I could force Spotify to quit whenever I closed my laptop.</p>
+<p>After some searching on StackOverflow I found that <a href="https://stackoverflow.com/questions/15868200/how-to-check-if-macbook-lid-is-closed-via-terminal">you can run a script</a> to check whether a mac laptop&rsquo;s lid is open or closed. Some further Googling introduced me to LaunchDaemons which allow you to automatically run a process in the background whenever the computer starts up. Using this, I could frequently query the status of the lid and issue a command to quit Spotify and set the system volume to mute if the lid was closed.</p>
+<p>The script is relatively straight forward</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span><span style="font-weight:bold">while</span> sleep <span style="color:#099">5</span> <span style="color:#998;font-style:italic">#check every 5 seconds</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2</span>    <span style="font-weight:bold">do</span> 
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3</span>    <span style="color:#008080">number</span><span style="font-weight:bold">=</span><span style="font-weight:bold">$(</span>ps aux | grep -v grep | grep -ci Spotify<span style="font-weight:bold">)</span> <span style="color:#998;font-style:italic">#check whether spotify is open</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4</span>    <span style="color:#008080">lid</span><span style="font-weight:bold">=</span><span style="font-weight:bold">$(</span>ioreg -r -k AppleClamshellState -d <span style="color:#099">4</span> | grep AppleClamshellState  | grep -ci <span style="color:#b84">&#39;No&#39;</span><span style="font-weight:bold">)</span> <span style="color:#998;font-style:italic">#check whether the lid is open</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5</span>    <span style="font-weight:bold">if</span> <span style="font-weight:bold">[</span> <span style="color:#008080">$lid</span> -eq <span style="color:#099">0</span> <span style="font-weight:bold">]</span> <span style="font-weight:bold">&amp;&amp;</span> <span style="font-weight:bold">[</span> <span style="color:#008080">$number</span> -gt <span style="color:#099">0</span> <span style="font-weight:bold">]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6</span>        <span style="font-weight:bold">then</span> 
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7</span>        /usr/bin/osascript -e <span style="color:#b84">&#39;quit app &#34;Spotify&#34;&#39;</span> <span style="color:#998;font-style:italic"># quit spotify</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8</span>        /usr/bin/sosascript -e <span style="color:#b84">&#34;set Volume 0&#34;</span> <span style="color:#998;font-style:italic"># mute the system volume</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9</span>    <span style="font-weight:bold">fi</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10</span> <span style="font-weight:bold">done</span>
+</code></pre></div><p>This can then be packaged up into a .plist file and placed into <code>/Users/username/Library/LaunchAgents</code> folder so that it runs in the background everytime you start up your laptop. The resulting .plist file looks like</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span><span style="color:#999;font-weight:bold">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2</span><span style="color:#999;font-weight:bold">&lt;!DOCTYPE plist PUBLIC &#34;-//Apple//DTD PLIST 1.0//EN&#34;
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3</span><span style="color:#999;font-weight:bold"> &#34;http://www.apple.com/DTDs/PropertyList-1.0.dtd&#34;&gt;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4</span><span style="color:#000080">&lt;plist</span> <span style="color:#008080">version=</span><span style="color:#b84">&#34;1.0&#34;</span><span style="color:#000080">&gt;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5</span><span style="color:#000080">&lt;dict&gt;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6</span>    <span style="color:#000080">&lt;key&gt;</span>Label<span style="color:#000080">&lt;/key&gt;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7</span>    <span style="color:#000080">&lt;string&gt;</span>shutup-spotify<span style="color:#000080">&lt;/string&gt;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8</span>    <span style="color:#000080">&lt;key&gt;</span>Program<span style="color:#000080">&lt;/key&gt;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9</span>    <span style="color:#000080">&lt;string&gt;</span>/usr/bin/osascript<span style="color:#000080">&lt;/string&gt;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10</span>    <span style="color:#000080">&lt;key&gt;</span>Program<span style="color:#000080">&lt;/key&gt;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11</span>    <span style="color:#000080">&lt;string&gt;</span>/bin/sh<span style="color:#000080">&lt;/string&gt;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12</span>    <span style="color:#000080">&lt;key&gt;</span>ProgramArguments<span style="color:#000080">&lt;/key&gt;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13</span>    <span style="color:#000080">&lt;array&gt;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14</span>        <span style="color:#000080">&lt;string&gt;</span>sh<span style="color:#000080">&lt;/string&gt;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15</span>        <span style="color:#000080">&lt;string&gt;</span>-c<span style="color:#000080">&lt;/string&gt;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16</span>        <span style="color:#000080">&lt;string&gt;</span>while sleep 5; do number=$(ps aux | grep -v grep | grep -ci Spotify); lid=$(ioreg -r -k AppleClamshellState -d 4 | grep AppleClamshellState  | grep -ci &#39;No&#39;); if [ $lid -eq 0 ] <span style="color:#a61717;background-color:#e3d2d2">&amp;&amp;</span> [ $number -gt 0 ]; then /usr/bin/osascript -e &#39;quit app &#34;Spotify&#34;&#39;; /usr/bin/sosascript -e &#34;set Volume 0&#34;; fi; done<span style="color:#000080">&lt;/string&gt;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17</span>    <span style="color:#000080">&lt;/array&gt;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18</span>    <span style="color:#000080">&lt;key&gt;</span>ServiceDescription<span style="color:#000080">&lt;/key&gt;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19</span>    <span style="color:#000080">&lt;string&gt;</span>Auto Keypress<span style="color:#000080">&lt;/string&gt;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20</span>    <span style="color:#000080">&lt;key&gt;</span>KeepAlive<span style="color:#000080">&lt;/key&gt;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21</span>    <span style="color:#000080">&lt;true/&gt;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22</span><span style="color:#000080">&lt;/dict&gt;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23</span><span style="color:#000080">&lt;/plist&gt;</span>
+</code></pre></div><p>I am very new at writing .plist files so I&rsquo;m sure there are improvements that could be made. But for now, I can finally relax when opening my laptop!</p>
+</section>
+      
+      <section><script src="https://utteranc.es/client.js"
+        repo="gtonkinhill/gtonkinhill.github.io"
+        issue-term="title"
+        label="Comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script></section>
+      
+      <section>
+        <footer class="page-footer">
+		<hr>
+		<ul class="page-footer-menu">
+		
+      <li><a href="https://github.com/gtonkinhill"><i class='fa fa-github fa-2x'></i> </a></li>
+		
+      <li><a href="https://orcid.org/0000-0003-4397-2224"><i class='fab fa-orcid fa-2x'></i></a></li>
+		
+      <li><a href="https://scholar.google.co.uk/citations?user=rpyuABcAAAAJ&amp;hl=en&amp;oi=ao"><i class='fa fa-graduation-cap fa-2x'></i> </a></li>
+		
+      <li><a href="https://twitter.com/gerrythill"><i class='fa fa-twitter fa-2x'></i> </a></li>
+		
+		</ul>
+
+  
+
+	<div class="copyright">
+	<p>
+    
+      &copy; 2022
+    Gerry Tonkin-Hill
+    (<a style="text-decorations:none; color:inherit;" href=https://creativecommons.org/licenses/by-nc/2.5/>CC BY-NC 2.5</a>)
+    
+  </p>
+</div>
+</footer>
+
+
+
+
+
+      </section>
+    </article>
+  </div>
+</body>
+
+</html>

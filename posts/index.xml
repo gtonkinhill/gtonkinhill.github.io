@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Gerry Tonkin-Hill</title>
+    <link>/posts/</link>
+    <description>Recent content in Posts on Gerry Tonkin-Hill</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Wed, 21 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Shut up Spotify!</title>
+      <link>/posts/shutup_spotify/</link>
+      <pubDate>Wed, 21 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/shutup_spotify/</guid>
+      <description>Shut up Spotify!  ⊕ Myspace  (xkcd)    Apart from when I&amp;rsquo;m forced to work from home I have generally worked in open plan offices. One of my big fears each day is that I will open my laptop and whatever embarrassing song I was listening to will immediately start playing on full volume for everyone to hear.
+Recently I bought a new pair of bluetooth headphones that conveniently allow you to connect to multiple devices at once.</description>
+    </item>
+    
+    <item>
+      <title>How many gene annotations are there?</title>
+      <link>/posts/how_many_annotations/</link>
+      <pubDate>Sat, 12 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/how_many_annotations/</guid>
+      <description>How many gene annotations are there? Grace Blackwell recently gave a really interesting talk on her work  Blackwell, G. A. et al. Exploring bacterial diversity via a curated and searchable snapshot of archived DNA sequences. Cold Spring Harbor Laboratory 2021.03.02.433662 (2021) doi:10.1101/2021.03.02.433662 generating a standardised and curated database of 661,405 bacterial genome assemblies using read data retrieved from the European Nucleotide Archive (ENA).
+This dataset is already proving to be very useful.</description>
+    </item>
+    
+  </channel>
+</rss>
